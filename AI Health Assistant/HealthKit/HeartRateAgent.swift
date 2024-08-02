@@ -61,7 +61,7 @@ class HeartRateAgent: HealthKitFetcher {
         do {
             let results = try context.fetch(fetchRequest)
             let heartRateData = results.map { data in
-                "Date: \(data.date ?? Date()), Average Heart Rate: \(data.heartRate)"
+                "Date: \(data.date ?? Date()), Average Heart Rate: \(data.avgRestingHeartRate)"
             }.joined(separator: "\n")
             completion(heartRateData, nil)
         } catch {
@@ -124,7 +124,7 @@ class HeartRateAgent: HealthKitFetcher {
                     heartRateData.date = date
                 }
                 
-                heartRateData.heartRate = Int64(averageHeartRate)
+                heartRateData.avgRestingHeartRate = Int64(averageHeartRate)
             } catch {
                 print("Failed to fetch or create heart rate data: \(error)")
             }

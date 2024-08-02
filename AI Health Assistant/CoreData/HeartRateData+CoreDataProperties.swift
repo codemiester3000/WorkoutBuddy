@@ -1,11 +1,3 @@
-//
-//  HeartRateData+CoreDataProperties.swift
-//  AI Health Assistant
-//
-//  Created by Owen Khoury on 7/30/24.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -16,10 +8,10 @@ extension HeartRateData {
         return NSFetchRequest<HeartRateData>(entityName: "HeartRateData")
     }
 
+    @NSManaged public var avgRestingHeartRate: Int64
     @NSManaged public var date: Date?
     @NSManaged public var maxHeartRate: Int64
-    @NSManaged public var avgRestingHeartRate: NSObject?
-    @NSManaged public var minHeartRate: NSObject?
+    @NSManaged public var minHeartRate: Int64
 
 }
 
