@@ -4,7 +4,6 @@ import UIKit
 
 class HeartRateAgent: HealthKitFetcher {
     private let healthStore = HKHealthStore()
-    private let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate)!
     private let context = CoreDataStack.shared.context
     
     func fetchData(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void) {
@@ -14,8 +13,7 @@ class HeartRateAgent: HealthKitFetcher {
             print("All of the data we need is cached in core data")
             fetchFromCoreData(from: startDate, to: endDate, completion: completion)
         } else if cachedDataStartDate <= endDate {
-            print("we have some cached data")
-            // We have some data in Core Data, but need to fetch more from HealthKit
+            print("We have some cached data")
             let coreDataStartDate = max(startDate, cachedDataStartDate)
             fetchFromCoreData(from: coreDataStartDate, to: endDate) { coreDataResult, error in
                 if let error = error {
@@ -23,7 +21,7 @@ class HeartRateAgent: HealthKitFetcher {
                     return
                 }
                 
-                self.fetchFromHealthKit(from: startDate, to: cachedDataStartDate) { healthKitResult, error in
+                self.fetchMissingHealthKitData(from: startDate, to: cachedDataStartDate) { healthKitResult, error in
                     if let error = error {
                         completion(nil, error)
                         return
@@ -34,9 +32,8 @@ class HeartRateAgent: HealthKitFetcher {
                 }
             }
         } else {
-            print("We dont have any cached data. pull it all")
-            // We don't have any relevant data in Core Data, fetch everything from HealthKit
-            fetchFromHealthKit(from: startDate, to: endDate, completion: completion)
+            print("We don't have any cached data. Pull it all")
+            fetchMissingHealthKitData(from: startDate, to: endDate, completion: completion)
         }
     }
     
@@ -61,7 +58,7 @@ class HeartRateAgent: HealthKitFetcher {
         do {
             let results = try context.fetch(fetchRequest)
             let heartRateData = results.map { data in
-                "Date: \(data.date ?? Date()), Average Heart Rate: \(data.avgRestingHeartRate)"
+                "Date: \(data.date ?? Date()), Average Resting Heart Rate: \(data.avgRestingHeartRate), Min Heart Rate: \(data.minHeartRate), Max Heart Rate: \(data.maxHeartRate)"
             }.joined(separator: "\n")
             completion(heartRateData, nil)
         } catch {
@@ -69,67 +66,153 @@ class HeartRateAgent: HealthKitFetcher {
         }
     }
     
-    private func fetchFromHealthKit(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void) {
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
-        let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { query, samples, error in
-            guard let samples = samples as? [HKQuantitySample], error == nil else {
+    private func fetchMissingHealthKitData(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void) {
+        var missingData: [HeartRateData] = []
+        
+        let calendar = Calendar.current
+        var date = startDate
+        while date <= endDate {
+            let heartRateData = HeartRateData(context: self.context)
+            heartRateData.date = date
+            missingData.append(heartRateData)
+            date = calendar.date(byAdding: .day, value: 1, to: date)!
+        }
+        
+        fetchHealthData(for: missingData) { error in
+            if let error = error {
                 completion(nil, error)
                 return
             }
             
-            let dailyAverageHeartRates = self.calculateDailyAverageHeartRates(samples: samples)
-            self.saveToCoreData(dailyAverageHeartRates: dailyAverageHeartRates)
-            
-            let heartRateData = dailyAverageHeartRates.map { date, avgHeartRate in
-                "Date: \(date), Average Heart Rate: \(avgHeartRate)"
+            self.saveToCoreData(dailyData: missingData)
+            let resultString = missingData.map { data in
+                "Date: \(data.date ?? Date()), Average Resting Heart Rate: \(data.avgRestingHeartRate), Min Heart Rate: \(data.minHeartRate), Max Heart Rate: \(data.maxHeartRate)"
             }.joined(separator: "\n")
-            
-            self.updateMetadata(startDate: startDate)
-            
-            completion(heartRateData, nil)
+            completion(resultString, nil)
         }
-        
-        healthStore.execute(query)
     }
     
-    private func calculateDailyAverageHeartRates(samples: [HKQuantitySample]) -> [(Date, Double)] {
-        var dailyHeartRates: [Date: [Double]] = [:]
+    private func fetchHealthData(for data: [HeartRateData], completion: @escaping (Error?) -> Void) {
+        let dispatchGroup = DispatchGroup()
         
-        for sample in samples {
-            let date = Calendar.current.startOfDay(for: sample.startDate)
-            let heartRate = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
-            dailyHeartRates[date, default: []].append(heartRate)
+        dispatchGroup.enter()
+        populateAverageRestingHeartRate(for: data) {
+            dispatchGroup.leave()
         }
         
-        return dailyHeartRates.map { date, heartRates in
-            let averageHeartRate = heartRates.reduce(0, +) / Double(heartRates.count)
-            return (date, averageHeartRate)
-        }.sorted { $0.0 < $1.0 }
+        dispatchGroup.enter()
+        populateMinMaxHeartRate(for: data) {
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(nil)
+        }
     }
     
-    private func saveToCoreData(dailyAverageHeartRates: [(Date, Double)]) {
-        for (date, averageHeartRate) in dailyAverageHeartRates {
-            let fetchRequest: NSFetchRequest<HeartRateData> = HeartRateData.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
+    private func populateAverageRestingHeartRate(for data: [HeartRateData], completion: @escaping () -> Void) {
+        let dispatchGroup = DispatchGroup()
+        
+        for heartRateData in data {
+            dispatchGroup.enter()
             
-            do {
-                let existingData = try context.fetch(fetchRequest)
-                let heartRateData: HeartRateData
-                
-                if let existingEntry = existingData.first {
-                    heartRateData = existingEntry
-                } else {
-                    heartRateData = HeartRateData(context: context)
-                    heartRateData.date = date
-                }
-                
-                heartRateData.avgRestingHeartRate = Int64(averageHeartRate)
-            } catch {
-                print("Failed to fetch or create heart rate data: \(error)")
+            let calendar = Calendar.current
+            let startDate = calendar.startOfDay(for: heartRateData.date ?? Date())
+            guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate) else {
+                dispatchGroup.leave()
+                continue
             }
+
+            guard let heartRateType = HKQuantityType.quantityType(forIdentifier: .restingHeartRate) else {
+                dispatchGroup.leave()
+                continue
+            }
+
+            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+            let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
+                guard error == nil, let heartRateSamples = samples as? [HKQuantitySample], !heartRateSamples.isEmpty else {
+                    DispatchQueue.main.async {
+                        heartRateData.avgRestingHeartRate = 0
+                        dispatchGroup.leave()
+                    }
+                    return
+                }
+
+                let totalHeartRate = heartRateSamples.reduce(0.0) { (result, sample) -> Double in
+                    let heartRateValue = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
+                    return result + heartRateValue
+                }
+
+                let averageHeartRate = totalHeartRate / Double(heartRateSamples.count)
+
+                DispatchQueue.main.async {
+                    heartRateData.avgRestingHeartRate = Int64(averageHeartRate.rounded())
+                    dispatchGroup.leave()
+                }
+            }
+
+            healthStore.execute(query)
         }
         
+        dispatchGroup.notify(queue: .main) {
+            completion()
+        }
+    }
+
+    
+    private func populateMinMaxHeartRate(for data: [HeartRateData], completion: @escaping () -> Void) {
+        let dispatchGroup = DispatchGroup()
+        
+        for heartRateData in data {
+            dispatchGroup.enter()
+            
+            let calendar = Calendar.current
+            let startDate = calendar.startOfDay(for: heartRateData.date ?? Date())
+            guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate) else {
+                dispatchGroup.leave()
+                continue
+            }
+
+            guard let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate) else {
+                dispatchGroup.leave()
+                continue
+            }
+
+            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+            let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
+                guard error == nil, let heartRateSamples = samples as? [HKQuantitySample], !heartRateSamples.isEmpty else {
+                    DispatchQueue.main.async {
+                        heartRateData.minHeartRate = 0
+                        heartRateData.maxHeartRate = 0
+                        dispatchGroup.leave()
+                    }
+                    return
+                }
+
+                let heartRates = heartRateSamples.map { sample in
+                    sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
+                }
+
+                let minHeartRate = heartRates.min() ?? 0
+                let maxHeartRate = heartRates.max() ?? 0
+
+                DispatchQueue.main.async {
+                    heartRateData.minHeartRate = Int64(minHeartRate.rounded())
+                    heartRateData.maxHeartRate = Int64(maxHeartRate.rounded())
+                    dispatchGroup.leave()
+                }
+            }
+
+            healthStore.execute(query)
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion()
+        }
+    }
+
+    
+    private func saveToCoreData(dailyData: [HeartRateData]) {
         do {
             try context.save()
         } catch {
@@ -153,31 +236,30 @@ class HeartRateAgent: HealthKitFetcher {
     }
     
     func resetCoreData(completion: @escaping (Error?) -> Void) {
-            let heartRateDataFetchRequest: NSFetchRequest<NSFetchRequestResult> = HeartRateData.fetchRequest()
-            let metadataFetchRequest: NSFetchRequest<NSFetchRequestResult> = Metadata.fetchRequest()
-
-            let batchDeleteHeartRateRequest = NSBatchDeleteRequest(fetchRequest: heartRateDataFetchRequest)
-            let batchDeleteMetadataRequest = NSBatchDeleteRequest(fetchRequest: metadataFetchRequest)
-
-            do {
-                try context.execute(batchDeleteHeartRateRequest)
-                try context.execute(batchDeleteMetadataRequest)
-                try context.save()
-                completion(nil)
-            } catch {
-                print("Failed to reset Core Data: \(error)")
-                completion(error)
-            }
+        let heartRateDataFetchRequest: NSFetchRequest<NSFetchRequestResult> = HeartRateData.fetchRequest()
+        let metadataFetchRequest: NSFetchRequest<NSFetchRequestResult> = Metadata.fetchRequest()
+        
+        let batchDeleteHeartRateRequest = NSBatchDeleteRequest(fetchRequest: heartRateDataFetchRequest)
+        let batchDeleteMetadataRequest = NSBatchDeleteRequest(fetchRequest: metadataFetchRequest)
+        
+        do {
+            try context.execute(batchDeleteHeartRateRequest)
+            try context.execute(batchDeleteMetadataRequest)
+            try context.save()
+            completion(nil)
+        } catch {
+            print("Failed to reset Core Data: \(error)")
+            completion(error)
         }
-
-        // You might want to add this method to your view controller or wherever it's appropriate
-        func cleanAndRefetchData(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void) {
-            resetCoreData { error in
-                if let error = error {
-                    completion(nil, error)
-                    return
-                }
-                self.fetchData(from: startDate, to: endDate, completion: completion)
+    }
+    
+    func cleanAndRefetchData(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void) {
+        resetCoreData { error in
+            if let error = error {
+                completion(nil, error)
+                return
             }
+            self.fetchData(from: startDate, to: endDate, completion: completion)
         }
+    }
 }
