@@ -23,7 +23,7 @@ class ChatGPTAPIClient {
         var request = URLRequest(url: url)
         
         request.httpMethod = "POST"
-        request.setValue("Bearer sk-proj-Ku9JUmgB3nG0QiNeZRzpT3BlbkFJAVWkpcLecAFyNV5vDwWb", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(Environment.openAIAPIKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let currentQuery = "User: \(message)"
@@ -83,4 +83,13 @@ class ChatGPTAPIClient {
         
         task.resume()
     }
+}
+
+struct Environment {
+    static let openAIAPIKey: String = {
+        guard let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
+            fatalError("API key not set in environment variables")
+        }
+        return apiKey
+    }()
 }
