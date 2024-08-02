@@ -5,7 +5,7 @@ struct ContentView: View {
     private let initialMessage = """
         Hello! I am your Health Assistant powered by HealthKit and GPT. I can analyze your HealthKit data to provide insights on your health and fitness. Ask me anything about your health data, workouts, or general health advice. How can I help you today?
         """
-
+    
     @State private var messageText = ""
     @State private var conversation: [Message] = []
     @State private var isTyping = false
@@ -92,33 +92,23 @@ struct ContentView: View {
     }
     
     private func initializeHealthKit() {
-            if !isInitialQuerySent {
-                let initialMessageObject = Message(content: initialMessage, isUserMessage: false)
-                conversation.append(initialMessageObject)
-                isInitialQuerySent = true
-            }
+        if !isInitialQuerySent {
+            let initialMessageObject = Message(content: initialMessage, isUserMessage: false)
+            conversation.append(initialMessageObject)
+            isInitialQuerySent = true
         }
+    }
     
     private func scrollToBottom(scrollProxy: ScrollViewProxy) {
         guard let lastMessage = conversation.last else { return }
         scrollProxy.scrollTo(lastMessage.id, anchor: .bottom)
     }
     
-//    private func sendOverviewMessage() {
-//        sendMessage(initialQuery: overviewQuery)
-//        isOverviewQuerySent = true
-//    }
-    
     private func sendMessage(initialQuery: String? = nil) {
         isTyping = true
         
         let query = initialQuery ?? messageText
         let userMessage = Message(content: query, isUserMessage: true)
-        
-//        if !isInitialQuerySent {
-//            conversation.append(userMessage)
-//            isInitialQuerySent = true
-//        }
         
         conversation.append(userMessage)
         
@@ -223,7 +213,7 @@ extension View {
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)

@@ -20,13 +20,16 @@ class QueryHandler {
                 return
             }
             
+            // The initial response from ChatGPT gives us a list of health agents to use and how far back each
+            // one should query for it's data. Once we have fetched the health data, we fire off a second query
+            // to chatGPT that asks to answer the initial user query given this provided health data context.
             guard let response = response, let parsedPairs = QueryHelper.parseResponse(response) else {
                 print("Error parsing response: \(String(describing: response))") // Debug print statement
                 completion(nil, NSError(domain: "InvalidResponse", code: 400, userInfo: nil))
                 return
             }
             
-            print("Parsed pairs: \(parsedPairs)") // Debug print statement
+            print("Parsed pairs: \(parsedPairs)")
             
             self.fetchMultipleData(parsedPairs: parsedPairs) { data, error in
                 if let error = error {
@@ -35,23 +38,26 @@ class QueryHandler {
                     return
                 }
                 
-                guard let data = data else {
-                    print("No data fetched")
-                    completion(nil, NSError(domain: "NoData", code: 400, userInfo: nil))
-                    return
+                // If ChatGPT was not able to repond to the intial query which requested agents. Send
+                // the initial query and let ChatGPT respond normaly. This should have the effect of allowing
+                // ChatGPT to respond normally
+                let finalPrompt: String
+                if let data = data {
+                    finalPrompt = "\(query)\n\nContextual Data:\n\(data)"
+                } else {
+                    finalPrompt = query
                 }
                 
-                let finalPrompt = "\(query)\n\nContextual Data:\n\(data)"
-                print("Final prompt: \(finalPrompt)")
-                
                 self.chatGPTClient.sendMessage(finalPrompt, includeInConversationHistory: true) { finalResponse, error in
+                    print("\nFinal ChatGPT prompt: \(String(describing: finalPrompt))")
+                    print("Final ChatGPT response: \(String(describing: finalResponse))\n")
+                    
                     if let error = error {
                         print("Error sending final message: \(error.localizedDescription)") // Debug print statement
                         completion(nil, error)
                         return
                     }
                     
-                    print("Final ChatGPT response: \(String(describing: finalResponse))") // Debug print statement
                     completion(finalResponse, error)
                 }
             }
@@ -61,20 +67,20 @@ class QueryHandler {
     private func fetchMultipleData(parsedPairs: [(dataType: String, timestamp: String)], completion: @escaping (String?, Error?) -> Void) {
         let group = DispatchGroup()
         var aggregatedData = ""
-        var fetchError: Error?
+        var errors: [Error] = []
         
         for (dataType, numDaysString) in parsedPairs {
             guard let numDays = Int(numDaysString) else {
                 print("Invalid number of days: \(numDaysString)") // Debug print statement
-                fetchError = NSError(domain: "InvalidNumDays", code: 400, userInfo: nil)
-                break
+                errors.append(NSError(domain: "InvalidNumDays", code: 400, userInfo: nil))
+                continue
             }
             
             group.enter()
             fetchData(dataType: dataType, numDays: numDays) { data, error in
                 if let error = error {
                     print("Error fetching data for \(dataType): \(error.localizedDescription)") // Debug print statement
-                    fetchError = error
+                    errors.append(error)
                 } else if let data = data {
                     aggregatedData += "\(dataType):\n\(data)\n\n"
                 }
@@ -83,13 +89,15 @@ class QueryHandler {
         }
         
         group.notify(queue: .main) {
-            if let error = fetchError {
-                completion(nil, error)
-            } else {
-                completion(aggregatedData, nil)
+            if !errors.isEmpty {
+                for error in errors {
+                    print("Fetch error: \(error.localizedDescription)")
+                }
             }
+            completion(aggregatedData, nil)
         }
     }
+    
     
     private func fetchData(dataType: String, numDays: Int, completion: @escaping (String?, Error?) -> Void) {
         guard let helper = healthKitHelpers[dataType] else {
