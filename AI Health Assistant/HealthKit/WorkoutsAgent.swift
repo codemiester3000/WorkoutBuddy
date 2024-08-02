@@ -1,6 +1,6 @@
 import HealthKit
 
-class WorkoutHelper {
+class WorkoutsAgent {
     private let healthStore = HKHealthStore()
     
     func getWorkoutMessage(completion: @escaping (String?, Error?) -> Void) {

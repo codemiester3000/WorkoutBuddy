@@ -2,7 +2,7 @@ import HealthKit
 import CoreData
 import UIKit
 
-class HeartRateAgent: HealthKitFetcher {
+class HeartRateAgent: HealthKitAgent {
     private let healthStore = HKHealthStore()
     private let context = CoreDataStack.shared.context
     
@@ -15,6 +15,10 @@ class HeartRateAgent: HealthKitFetcher {
         } else if cachedDataStartDate <= endDate {
             print("We have some cached data")
             let coreDataStartDate = max(startDate, cachedDataStartDate)
+            
+            // Attempt to pull what data we can from our cached CoreData. Find out what dates we don't have
+            // cached that ChatGPT asked us for and pull those from HealthKit. Save any newly pulled dates
+            // in CoreData.
             fetchFromCoreData(from: coreDataStartDate, to: endDate) { coreDataResult, error in
                 if let error = error {
                     completion(nil, error)

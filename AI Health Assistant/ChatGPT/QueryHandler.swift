@@ -2,7 +2,7 @@ import Foundation
 
 class QueryHandler {
     private let chatGPTClient = ChatGPTAPIClient()
-    private let healthKitHelpers: [String: HealthKitFetcher] = [
+    private let healthKitHelpers: [String: HealthKitAgent] = [
         "HeartRateData": HeartRateAgent()
         // Add other data type helpers here
     ]

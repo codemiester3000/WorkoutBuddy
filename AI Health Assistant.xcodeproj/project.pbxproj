@@ -17,7 +17,6 @@
 		C53511512BEAFD9A00766819 /* AI_Health_AssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511502BEAFD9A00766819 /* AI_Health_AssistantUITests.swift */; };
 		C53511532BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */; };
 		C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */; };
-		C53A29B62C0527A000306D83 /* HealthKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53A29B52C0527A000306D83 /* HealthKitHelper.swift */; };
 		C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */; };
 		C59F3D1C2C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */; };
 		C59F3D1D2C565CDE0047D394 /* StepData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */; };
@@ -29,9 +28,9 @@
 		C59F3D242C565D240047D394 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D232C565D240047D394 /* CoreDataStack.swift */; };
 		C59F3D282C5661600047D394 /* QueryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D272C5661600047D394 /* QueryHelper.swift */; };
 		C59F3D2A2C5661D10047D394 /* QueryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D292C5661D10047D394 /* QueryHandler.swift */; };
-		C59F3D2C2C5663B40047D394 /* HealthKitFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D2B2C5663B40047D394 /* HealthKitFetcher.swift */; };
+		C59F3D2C2C5663B40047D394 /* HealthKitAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D2B2C5663B40047D394 /* HealthKitAgent.swift */; };
 		C5E58B952C0E754400C93FC6 /* HeartRateAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E58B942C0E754400C93FC6 /* HeartRateAgent.swift */; };
-		C5E58B972C0E8A7200C93FC6 /* WorkoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E58B962C0E8A7200C93FC6 /* WorkoutHelper.swift */; };
+		C5E58B972C0E8A7200C93FC6 /* WorkoutsAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E58B962C0E8A7200C93FC6 /* WorkoutsAgent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +65,6 @@
 		C53511502BEAFD9A00766819 /* AI_Health_AssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantUITests.swift; sourceTree = "<group>"; };
 		C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTAPIClient.swift; sourceTree = "<group>"; };
-		C53A29B52C0527A000306D83 /* HealthKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHelper.swift; sourceTree = "<group>"; };
 		C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -78,9 +76,9 @@
 		C59F3D232C565D240047D394 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		C59F3D272C5661600047D394 /* QueryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHelper.swift; sourceTree = "<group>"; };
 		C59F3D292C5661D10047D394 /* QueryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHandler.swift; sourceTree = "<group>"; };
-		C59F3D2B2C5663B40047D394 /* HealthKitFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFetcher.swift; sourceTree = "<group>"; };
+		C59F3D2B2C5663B40047D394 /* HealthKitAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAgent.swift; sourceTree = "<group>"; };
 		C5E58B942C0E754400C93FC6 /* HeartRateAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateAgent.swift; sourceTree = "<group>"; };
-		C5E58B962C0E8A7200C93FC6 /* WorkoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHelper.swift; sourceTree = "<group>"; };
+		C5E58B962C0E8A7200C93FC6 /* WorkoutsAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsAgent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,10 +196,9 @@
 		C59F3D252C5660710047D394 /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
-				C59F3D2B2C5663B40047D394 /* HealthKitFetcher.swift */,
-				C5E58B962C0E8A7200C93FC6 /* WorkoutHelper.swift */,
+				C59F3D2B2C5663B40047D394 /* HealthKitAgent.swift */,
+				C5E58B962C0E8A7200C93FC6 /* WorkoutsAgent.swift */,
 				C5E58B942C0E754400C93FC6 /* HeartRateAgent.swift */,
-				C53A29B52C0527A000306D83 /* HealthKitHelper.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -357,10 +354,9 @@
 				C59F3D242C565D240047D394 /* CoreDataStack.swift in Sources */,
 				C59F3D2A2C5661D10047D394 /* QueryHandler.swift in Sources */,
 				C59F3D212C565CDE0047D394 /* SleepData+CoreDataClass.swift in Sources */,
-				C59F3D2C2C5663B40047D394 /* HealthKitFetcher.swift in Sources */,
-				C5E58B972C0E8A7200C93FC6 /* WorkoutHelper.swift in Sources */,
+				C59F3D2C2C5663B40047D394 /* HealthKitAgent.swift in Sources */,
+				C5E58B972C0E8A7200C93FC6 /* WorkoutsAgent.swift in Sources */,
 				C59F3D1F2C565CDE0047D394 /* Metadata+CoreDataClass.swift in Sources */,
-				C53A29B62C0527A000306D83 /* HealthKitHelper.swift in Sources */,
 				C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */,
 				C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */,
 				C59F3D202C565CDE0047D394 /* Metadata+CoreDataProperties.swift in Sources */,

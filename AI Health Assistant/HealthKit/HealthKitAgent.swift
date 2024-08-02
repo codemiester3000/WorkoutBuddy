@@ -1,5 +1,5 @@
 import Foundation
 
-protocol HealthKitFetcher {
+protocol HealthKitAgent {
     func fetchData(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void)
 }
