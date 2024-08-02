@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C52BBB4F2C55D98900B63A7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52BBB4E2C55D98900B63A7E /* CoreData.framework */; };
+		C52BBB552C55D9B400B63A7E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C52BBB532C55D9B400B63A7E /* Model.xcdatamodeld */; };
 		C53511352BEAFD9900766819 /* AI_Health_AssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511342BEAFD9900766819 /* AI_Health_AssistantApp.swift */; };
 		C53511372BEAFD9900766819 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511362BEAFD9900766819 /* ContentView.swift */; };
 		C53511392BEAFD9A00766819 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53511382BEAFD9A00766819 /* Assets.xcassets */; };
@@ -14,6 +16,22 @@
 		C53511472BEAFD9A00766819 /* AI_Health_AssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511462BEAFD9A00766819 /* AI_Health_AssistantTests.swift */; };
 		C53511512BEAFD9A00766819 /* AI_Health_AssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511502BEAFD9A00766819 /* AI_Health_AssistantUITests.swift */; };
 		C53511532BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */; };
+		C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */; };
+		C53A29B62C0527A000306D83 /* HealthKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53A29B52C0527A000306D83 /* HealthKitHelper.swift */; };
+		C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */; };
+		C59F3D1C2C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */; };
+		C59F3D1D2C565CDE0047D394 /* StepData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */; };
+		C59F3D1E2C565CDE0047D394 /* StepData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D162C565CDE0047D394 /* StepData+CoreDataProperties.swift */; };
+		C59F3D1F2C565CDE0047D394 /* Metadata+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D172C565CDE0047D394 /* Metadata+CoreDataClass.swift */; };
+		C59F3D202C565CDE0047D394 /* Metadata+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D182C565CDE0047D394 /* Metadata+CoreDataProperties.swift */; };
+		C59F3D212C565CDE0047D394 /* SleepData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D192C565CDE0047D394 /* SleepData+CoreDataClass.swift */; };
+		C59F3D222C565CDE0047D394 /* SleepData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D1A2C565CDE0047D394 /* SleepData+CoreDataProperties.swift */; };
+		C59F3D242C565D240047D394 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D232C565D240047D394 /* CoreDataStack.swift */; };
+		C59F3D282C5661600047D394 /* QueryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D272C5661600047D394 /* QueryHelper.swift */; };
+		C59F3D2A2C5661D10047D394 /* QueryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D292C5661D10047D394 /* QueryHandler.swift */; };
+		C59F3D2C2C5663B40047D394 /* HealthKitFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D2B2C5663B40047D394 /* HealthKitFetcher.swift */; };
+		C5E58B952C0E754400C93FC6 /* HeartRateAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E58B942C0E754400C93FC6 /* HeartRateAgent.swift */; };
+		C5E58B972C0E8A7200C93FC6 /* WorkoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E58B962C0E8A7200C93FC6 /* WorkoutHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C52BBB4E2C55D98900B63A7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		C52BBB542C55D9B400B63A7E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C53511312BEAFD9900766819 /* AI Health Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Health Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53511342BEAFD9900766819 /* AI_Health_AssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantApp.swift; sourceTree = "<group>"; };
 		C53511362BEAFD9900766819 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +65,22 @@
 		C535114C2BEAFD9A00766819 /* AI Health AssistantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AI Health AssistantUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53511502BEAFD9A00766819 /* AI_Health_AssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantUITests.swift; sourceTree = "<group>"; };
 		C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTAPIClient.swift; sourceTree = "<group>"; };
+		C53A29B52C0527A000306D83 /* HealthKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHelper.swift; sourceTree = "<group>"; };
+		C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C59F3D162C565CDE0047D394 /* StepData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C59F3D172C565CDE0047D394 /* Metadata+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Metadata+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C59F3D182C565CDE0047D394 /* Metadata+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Metadata+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C59F3D192C565CDE0047D394 /* SleepData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SleepData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C59F3D1A2C565CDE0047D394 /* SleepData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SleepData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C59F3D232C565D240047D394 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		C59F3D272C5661600047D394 /* QueryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHelper.swift; sourceTree = "<group>"; };
+		C59F3D292C5661D10047D394 /* QueryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHandler.swift; sourceTree = "<group>"; };
+		C59F3D2B2C5663B40047D394 /* HealthKitFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFetcher.swift; sourceTree = "<group>"; };
+		C5E58B942C0E754400C93FC6 /* HeartRateAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateAgent.swift; sourceTree = "<group>"; };
+		C5E58B962C0E8A7200C93FC6 /* WorkoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C52BBB4F2C55D98900B63A7E /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +109,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C52BBB4D2C55D98900B63A7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C52BBB4E2C55D98900B63A7E /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C52BBB902C565A8F00B63A7E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */,
+				C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */,
+				C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */,
+				C59F3D162C565CDE0047D394 /* StepData+CoreDataProperties.swift */,
+				C59F3D172C565CDE0047D394 /* Metadata+CoreDataClass.swift */,
+				C59F3D182C565CDE0047D394 /* Metadata+CoreDataProperties.swift */,
+				C59F3D192C565CDE0047D394 /* SleepData+CoreDataClass.swift */,
+				C59F3D1A2C565CDE0047D394 /* SleepData+CoreDataProperties.swift */,
+				C59F3D232C565D240047D394 /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		C53511282BEAFD9900766819 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +140,7 @@
 				C53511452BEAFD9A00766819 /* AI Health AssistantTests */,
 				C535114F2BEAFD9A00766819 /* AI Health AssistantUITests */,
 				C53511322BEAFD9900766819 /* Products */,
+				C52BBB4D2C55D98900B63A7E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,11 +157,15 @@
 		C53511332BEAFD9900766819 /* AI Health Assistant */ = {
 			isa = PBXGroup;
 			children = (
+				C59F3D262C56614C0047D394 /* ChatGPT */,
+				C59F3D252C5660710047D394 /* HealthKit */,
+				C52BBB902C565A8F00B63A7E /* CoreData */,
 				C53511342BEAFD9900766819 /* AI_Health_AssistantApp.swift */,
 				C53511362BEAFD9900766819 /* ContentView.swift */,
 				C53511382BEAFD9A00766819 /* Assets.xcassets */,
 				C535113A2BEAFD9A00766819 /* AI_Health_Assistant.entitlements */,
 				C535113B2BEAFD9A00766819 /* Preview Content */,
+				C52BBB532C55D9B400B63A7E /* Model.xcdatamodeld */,
 			);
 			path = "AI Health Assistant";
 			sourceTree = "<group>";
@@ -127,6 +193,27 @@
 				C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */,
 			);
 			path = "AI Health AssistantUITests";
+			sourceTree = "<group>";
+		};
+		C59F3D252C5660710047D394 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				C59F3D2B2C5663B40047D394 /* HealthKitFetcher.swift */,
+				C5E58B962C0E8A7200C93FC6 /* WorkoutHelper.swift */,
+				C5E58B942C0E754400C93FC6 /* HeartRateAgent.swift */,
+				C53A29B52C0527A000306D83 /* HealthKitHelper.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		C59F3D262C56614C0047D394 /* ChatGPT */ = {
+			isa = PBXGroup;
+			children = (
+				C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */,
+				C59F3D272C5661600047D394 /* QueryHelper.swift */,
+				C59F3D292C5661D10047D394 /* QueryHandler.swift */,
+			);
+			path = ChatGPT;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +346,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59F3D1C2C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift in Sources */,
+				C5E58B952C0E754400C93FC6 /* HeartRateAgent.swift in Sources */,
+				C59F3D282C5661600047D394 /* QueryHelper.swift in Sources */,
 				C53511372BEAFD9900766819 /* ContentView.swift in Sources */,
+				C59F3D1D2C565CDE0047D394 /* StepData+CoreDataClass.swift in Sources */,
+				C59F3D1E2C565CDE0047D394 /* StepData+CoreDataProperties.swift in Sources */,
 				C53511352BEAFD9900766819 /* AI_Health_AssistantApp.swift in Sources */,
+				C52BBB552C55D9B400B63A7E /* Model.xcdatamodeld in Sources */,
+				C59F3D242C565D240047D394 /* CoreDataStack.swift in Sources */,
+				C59F3D2A2C5661D10047D394 /* QueryHandler.swift in Sources */,
+				C59F3D212C565CDE0047D394 /* SleepData+CoreDataClass.swift in Sources */,
+				C59F3D2C2C5663B40047D394 /* HealthKitFetcher.swift in Sources */,
+				C5E58B972C0E8A7200C93FC6 /* WorkoutHelper.swift in Sources */,
+				C59F3D1F2C565CDE0047D394 /* Metadata+CoreDataClass.swift in Sources */,
+				C53A29B62C0527A000306D83 /* HealthKitHelper.swift in Sources */,
+				C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */,
+				C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */,
+				C59F3D202C565CDE0047D394 /* Metadata+CoreDataProperties.swift in Sources */,
+				C59F3D222C565CDE0047D394 /* SleepData+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +528,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Access to your health data allows the app to provide personalized insights, track your progress, and offer tailored recommendations based on your activity and fitness levels\"";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"By granting access to write health data, you can securely store and manage your health information within the app and sync it with the Health app\"";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -442,10 +548,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "owenkhoury.AI-Health-Assistant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -462,6 +569,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Access to your health data allows the app to provide personalized insights, track your progress, and offer tailored recommendations based on your activity and fitness levels\"";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"By granting access to write health data, you can securely store and manage your health information within the app and sync it with the Health app\"";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -480,10 +589,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "owenkhoury.AI-Health-Assistant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -617,6 +727,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C52BBB532C55D9B400B63A7E /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C52BBB542C55D9B400B63A7E /* Model.xcdatamodel */,
+			);
+			currentVersion = C52BBB542C55D9B400B63A7E /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C53511292BEAFD9900766819 /* Project object */;
 }
