@@ -13,9 +13,9 @@ class QueryHandler {
         
         print("sending message")
         chatGPTClient.sendMessage(initialPrompt, includeInConversationHistory: false) { response, error in
-            print("Initial ChatGPT response: \(String(describing: response))") // Debug print statement
+            print("\nInitial ChatGPT prompt: \(String(describing: initialPrompt))")
+            print("Initial ChatGPT response: \(String(describing: response))\n")
             if let error = error {
-                print("Error sending initial message: \(error.localizedDescription)")
                 completion(nil, error)
                 return
             }

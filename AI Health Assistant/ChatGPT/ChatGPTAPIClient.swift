@@ -41,21 +41,41 @@ class ChatGPTAPIClient {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
             request.httpBody = jsonData
+            
+            // Debug print: Request details
+            print("Request URL: \(request.url?.absoluteString ?? "N/A")")
+            print("Request Method: \(request.httpMethod ?? "N/A")")
+            print("Request Headers: \(request.allHTTPHeaderFields ?? [:])")
+            if let bodyString = String(data: jsonData, encoding: .utf8) {
+                print("Request Body: \(bodyString)")
+            }
         } catch {
             completion(nil, error)
             return
         }
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+            // Debug print: Response details
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Response Status Code: \(httpResponse.statusCode)")
+                print("Response Headers: \(httpResponse.allHeaderFields)")
+            }
             
             if let error = error {
+                print("Network Error: \(error.localizedDescription)")
                 completion(nil, error)
                 return
             }
             
             guard let data = data else {
+                print("No data received")
                 completion(nil, nil)
                 return
+            }
+            
+            // Debug print: Response body
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("Response Body: \(responseString)")
             }
             
             do {
@@ -74,9 +94,11 @@ class ChatGPTAPIClient {
                     }
                     completion(content, nil)
                 } else {
+                    print("Failed to parse response")
                     completion(nil, nil)
                 }
             } catch {
+                print("JSON Parsing Error: \(error.localizedDescription)")
                 completion(nil, error)
             }
         }
