@@ -7,7 +7,7 @@ class QueryHandler {
         // Add other data type helpers here
     ]
     let activeAgentsManager = ActiveAgentsManager.shared
-    
+        
     func handleUserQuery(_ query: String, completion: @escaping (String?, Error?) -> Void) {
         print("handleUserQuery")
         let initialPrompt = QueryHelper.formatPrompt(for: query)
