@@ -11,7 +11,7 @@ import SwiftUI
 struct AI_Health_AssistantApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ChatBotView()
         }
     }
 }

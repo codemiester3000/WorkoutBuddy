@@ -6,6 +6,10 @@ class HeartRateAgent: HealthKitAgent {
     private let healthStore = HKHealthStore()
     private let context = CoreDataStack.shared.context
     
+    func agentName() -> String {
+        return "HeartRateData"
+    }
+    
     func fetchData(from startDate: Date, to endDate: Date, completion: @escaping (String?, Error?) -> Void) {
         let cachedDataStartDate = getCachedDataStartDate()
         
@@ -126,12 +130,12 @@ class HeartRateAgent: HealthKitAgent {
                 dispatchGroup.leave()
                 continue
             }
-
+            
             guard let heartRateType = HKQuantityType.quantityType(forIdentifier: .restingHeartRate) else {
                 dispatchGroup.leave()
                 continue
             }
-
+            
             let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
             let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
                 guard error == nil, let heartRateSamples = samples as? [HKQuantitySample], !heartRateSamples.isEmpty else {
@@ -141,20 +145,20 @@ class HeartRateAgent: HealthKitAgent {
                     }
                     return
                 }
-
+                
                 let totalHeartRate = heartRateSamples.reduce(0.0) { (result, sample) -> Double in
                     let heartRateValue = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
                     return result + heartRateValue
                 }
-
+                
                 let averageHeartRate = totalHeartRate / Double(heartRateSamples.count)
-
+                
                 DispatchQueue.main.async {
                     heartRateData.avgRestingHeartRate = Int64(averageHeartRate.rounded())
                     dispatchGroup.leave()
                 }
             }
-
+            
             healthStore.execute(query)
         }
         
@@ -162,7 +166,7 @@ class HeartRateAgent: HealthKitAgent {
             completion()
         }
     }
-
+    
     
     private func populateMinMaxHeartRate(for data: [HeartRateData], completion: @escaping () -> Void) {
         let dispatchGroup = DispatchGroup()
@@ -176,12 +180,12 @@ class HeartRateAgent: HealthKitAgent {
                 dispatchGroup.leave()
                 continue
             }
-
+            
             guard let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate) else {
                 dispatchGroup.leave()
                 continue
             }
-
+            
             let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
             let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
                 guard error == nil, let heartRateSamples = samples as? [HKQuantitySample], !heartRateSamples.isEmpty else {
@@ -192,21 +196,21 @@ class HeartRateAgent: HealthKitAgent {
                     }
                     return
                 }
-
+                
                 let heartRates = heartRateSamples.map { sample in
                     sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
                 }
-
+                
                 let minHeartRate = heartRates.min() ?? 0
                 let maxHeartRate = heartRates.max() ?? 0
-
+                
                 DispatchQueue.main.async {
                     heartRateData.minHeartRate = Int64(minHeartRate.rounded())
                     heartRateData.maxHeartRate = Int64(maxHeartRate.rounded())
                     dispatchGroup.leave()
                 }
             }
-
+            
             healthStore.execute(query)
         }
         
@@ -214,7 +218,7 @@ class HeartRateAgent: HealthKitAgent {
             completion()
         }
     }
-
+    
     
     private func saveToCoreData(dailyData: [HeartRateData]) {
         do {

@@ -6,15 +6,16 @@ class QueryHandler {
         "HeartRateData": HeartRateAgent()
         // Add other data type helpers here
     ]
+    let activeAgentsManager = ActiveAgentsManager.shared
     
     func handleUserQuery(_ query: String, completion: @escaping (String?, Error?) -> Void) {
         print("handleUserQuery")
         let initialPrompt = QueryHelper.formatPrompt(for: query)
+        self.activeAgentsManager.clearActiveDataTypes()
         
         print("sending message")
         chatGPTClient.sendMessage(initialPrompt, includeInConversationHistory: false) { response, error in
-            print("\nInitial ChatGPT prompt: \(String(describing: initialPrompt))")
-            print("Initial ChatGPT response: \(String(describing: response))\n")
+            print("\nInitial ChatGPT response: \(String(describing: response))\n")
             if let error = error {
                 completion(nil, error)
                 return
@@ -24,7 +25,7 @@ class QueryHandler {
             // one should query for it's data. Once we have fetched the health data, we fire off a second query
             // to chatGPT that asks to answer the initial user query given this provided health data context.
             guard let response = response, let parsedPairs = QueryHelper.parseResponse(response) else {
-                print("Error parsing response: \(String(describing: response))") // Debug print statement
+                print("Error parsing response: \(String(describing: response))")
                 completion(nil, NSError(domain: "InvalidResponse", code: 400, userInfo: nil))
                 return
             }
@@ -75,6 +76,10 @@ class QueryHandler {
                 errors.append(NSError(domain: "InvalidNumDays", code: 400, userInfo: nil))
                 continue
             }
+            
+            // Update the singleton agents manager so the UI can know which agents we're querying.
+            let dataTypes = parsedPairs.map { $0.dataType }
+            self.activeAgentsManager.setActiveDataTypes(dataTypes)
             
             group.enter()
             fetchData(dataType: dataType, numDays: numDays) { data, error in

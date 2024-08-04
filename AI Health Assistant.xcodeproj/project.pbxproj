@@ -10,13 +10,24 @@
 		C52BBB4F2C55D98900B63A7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52BBB4E2C55D98900B63A7E /* CoreData.framework */; };
 		C52BBB552C55D9B400B63A7E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C52BBB532C55D9B400B63A7E /* Model.xcdatamodeld */; };
 		C53511352BEAFD9900766819 /* AI_Health_AssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511342BEAFD9900766819 /* AI_Health_AssistantApp.swift */; };
-		C53511372BEAFD9900766819 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511362BEAFD9900766819 /* ContentView.swift */; };
+		C53511372BEAFD9900766819 /* ChatBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511362BEAFD9900766819 /* ChatBotView.swift */; };
 		C53511392BEAFD9A00766819 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53511382BEAFD9A00766819 /* Assets.xcassets */; };
 		C535113D2BEAFD9A00766819 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C535113C2BEAFD9A00766819 /* Preview Assets.xcassets */; };
 		C53511472BEAFD9A00766819 /* AI_Health_AssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511462BEAFD9A00766819 /* AI_Health_AssistantTests.swift */; };
 		C53511512BEAFD9A00766819 /* AI_Health_AssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511502BEAFD9A00766819 /* AI_Health_AssistantUITests.swift */; };
 		C53511532BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */; };
 		C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */; };
+		C54CD7A72C5D9AC6001E749B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7A62C5D9AC6001E749B /* HeaderView.swift */; };
+		C54CD7A92C5D9AD6001E749B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7A82C5D9AD6001E749B /* ChatView.swift */; };
+		C54CD7AB2C5D9AF6001E749B /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7AA2C5D9AF6001E749B /* InputView.swift */; };
+		C54CD7AD2C5D9B8B001E749B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7AC2C5D9B8B001E749B /* Message.swift */; };
+		C54CD7AF2C5D9C35001E749B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7AE2C5D9C35001E749B /* MessageView.swift */; };
+		C54CD7B12C5D9C49001E749B /* TypingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7B02C5D9C49001E749B /* TypingIndicatorView.swift */; };
+		C54CD7B32C5D9CFD001E749B /* AIResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7B22C5D9CFD001E749B /* AIResponseView.swift */; };
+		C54CD7B82C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C54CD7B72C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf */; };
+		C54CD7BB2C5E8868001E749B /* ActiveAgentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7BA2C5E8868001E749B /* ActiveAgentsManager.swift */; };
+		C54CD7BD2C5E8C3A001E749B /* HeartRateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7BC2C5E8C3A001E749B /* HeartRateAnimationView.swift */; };
+		C54CD7BF2C5F098C001E749B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C54CD7BE2C5F098C001E749B /* Config.plist */; };
 		C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */; };
 		C59F3D1C2C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */; };
 		C59F3D1D2C565CDE0047D394 /* StepData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */; };
@@ -55,7 +66,7 @@
 		C52BBB542C55D9B400B63A7E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C53511312BEAFD9900766819 /* AI Health Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Health Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53511342BEAFD9900766819 /* AI_Health_AssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantApp.swift; sourceTree = "<group>"; };
-		C53511362BEAFD9900766819 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C53511362BEAFD9900766819 /* ChatBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotView.swift; sourceTree = "<group>"; };
 		C53511382BEAFD9A00766819 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C535113A2BEAFD9A00766819 /* AI_Health_Assistant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AI_Health_Assistant.entitlements; sourceTree = "<group>"; };
 		C535113C2BEAFD9A00766819 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -65,6 +76,18 @@
 		C53511502BEAFD9A00766819 /* AI_Health_AssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantUITests.swift; sourceTree = "<group>"; };
 		C53511522BEAFD9A00766819 /* AI_Health_AssistantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Health_AssistantUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTAPIClient.swift; sourceTree = "<group>"; };
+		C54CD7A62C5D9AC6001E749B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		C54CD7A82C5D9AD6001E749B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		C54CD7AA2C5D9AF6001E749B /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		C54CD7AC2C5D9B8B001E749B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		C54CD7AE2C5D9C35001E749B /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		C54CD7B02C5D9C49001E749B /* TypingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicatorView.swift; sourceTree = "<group>"; };
+		C54CD7B22C5D9CFD001E749B /* AIResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResponseView.swift; sourceTree = "<group>"; };
+		C54CD7B72C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		C54CD7B92C5DC40D001E749B /* AI-Health-Assistant-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AI-Health-Assistant-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C54CD7BA2C5E8868001E749B /* ActiveAgentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAgentsManager.swift; sourceTree = "<group>"; };
+		C54CD7BC2C5E8C3A001E749B /* HeartRateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateAnimationView.swift; sourceTree = "<group>"; };
+		C54CD7BE2C5F098C001E749B /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -155,11 +178,13 @@
 		C53511332BEAFD9900766819 /* AI Health Assistant */ = {
 			isa = PBXGroup;
 			children = (
+				C54CD7B92C5DC40D001E749B /* AI-Health-Assistant-Info.plist */,
+				C54CD7B52C5DC368001E749B /* Resources */,
+				C54CD7A52C5D9A05001E749B /* UI */,
 				C59F3D262C56614C0047D394 /* ChatGPT */,
 				C59F3D252C5660710047D394 /* HealthKit */,
 				C52BBB902C565A8F00B63A7E /* CoreData */,
 				C53511342BEAFD9900766819 /* AI_Health_AssistantApp.swift */,
-				C53511362BEAFD9900766819 /* ContentView.swift */,
 				C53511382BEAFD9A00766819 /* Assets.xcassets */,
 				C535113A2BEAFD9A00766819 /* AI_Health_Assistant.entitlements */,
 				C535113B2BEAFD9A00766819 /* Preview Content */,
@@ -193,6 +218,40 @@
 			path = "AI Health AssistantUITests";
 			sourceTree = "<group>";
 		};
+		C54CD7A52C5D9A05001E749B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C53511362BEAFD9900766819 /* ChatBotView.swift */,
+				C54CD7A62C5D9AC6001E749B /* HeaderView.swift */,
+				C54CD7A82C5D9AD6001E749B /* ChatView.swift */,
+				C54CD7AA2C5D9AF6001E749B /* InputView.swift */,
+				C54CD7AC2C5D9B8B001E749B /* Message.swift */,
+				C54CD7AE2C5D9C35001E749B /* MessageView.swift */,
+				C54CD7B02C5D9C49001E749B /* TypingIndicatorView.swift */,
+				C54CD7B22C5D9CFD001E749B /* AIResponseView.swift */,
+				C54CD7BC2C5E8C3A001E749B /* HeartRateAnimationView.swift */,
+			);
+			name = UI;
+			path = "AI Health Assistant/UI";
+			sourceTree = SOURCE_ROOT;
+		};
+		C54CD7B52C5DC368001E749B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C54CD7B62C5DC368001E749B /* Fonts */,
+				C54CD7BE2C5F098C001E749B /* Config.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C54CD7B62C5DC368001E749B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C54CD7B72C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C59F3D252C5660710047D394 /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +268,7 @@
 				C535115F2BEB01B000766819 /* ChatGPTAPIClient.swift */,
 				C59F3D272C5661600047D394 /* QueryHelper.swift */,
 				C59F3D292C5661D10047D394 /* QueryHandler.swift */,
+				C54CD7BA2C5E8868001E749B /* ActiveAgentsManager.swift */,
 			);
 			path = ChatGPT;
 			sourceTree = "<group>";
@@ -317,8 +377,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C54CD7BF2C5F098C001E749B /* Config.plist in Resources */,
 				C535113D2BEAFD9A00766819 /* Preview Assets.xcassets in Resources */,
 				C53511392BEAFD9A00766819 /* Assets.xcassets in Resources */,
+				C54CD7B82C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,19 +408,28 @@
 				C59F3D1C2C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift in Sources */,
 				C5E58B952C0E754400C93FC6 /* HeartRateAgent.swift in Sources */,
 				C59F3D282C5661600047D394 /* QueryHelper.swift in Sources */,
-				C53511372BEAFD9900766819 /* ContentView.swift in Sources */,
+				C53511372BEAFD9900766819 /* ChatBotView.swift in Sources */,
 				C59F3D1D2C565CDE0047D394 /* StepData+CoreDataClass.swift in Sources */,
 				C59F3D1E2C565CDE0047D394 /* StepData+CoreDataProperties.swift in Sources */,
+				C54CD7A72C5D9AC6001E749B /* HeaderView.swift in Sources */,
+				C54CD7B32C5D9CFD001E749B /* AIResponseView.swift in Sources */,
 				C53511352BEAFD9900766819 /* AI_Health_AssistantApp.swift in Sources */,
 				C52BBB552C55D9B400B63A7E /* Model.xcdatamodeld in Sources */,
 				C59F3D242C565D240047D394 /* CoreDataStack.swift in Sources */,
 				C59F3D2A2C5661D10047D394 /* QueryHandler.swift in Sources */,
 				C59F3D212C565CDE0047D394 /* SleepData+CoreDataClass.swift in Sources */,
+				C54CD7A92C5D9AD6001E749B /* ChatView.swift in Sources */,
 				C59F3D2C2C5663B40047D394 /* HealthKitAgent.swift in Sources */,
 				C5E58B972C0E8A7200C93FC6 /* WorkoutsAgent.swift in Sources */,
+				C54CD7B12C5D9C49001E749B /* TypingIndicatorView.swift in Sources */,
+				C54CD7AB2C5D9AF6001E749B /* InputView.swift in Sources */,
 				C59F3D1F2C565CDE0047D394 /* Metadata+CoreDataClass.swift in Sources */,
+				C54CD7AD2C5D9B8B001E749B /* Message.swift in Sources */,
 				C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */,
 				C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */,
+				C54CD7BD2C5E8C3A001E749B /* HeartRateAnimationView.swift in Sources */,
+				C54CD7AF2C5D9C35001E749B /* MessageView.swift in Sources */,
+				C54CD7BB2C5E8868001E749B /* ActiveAgentsManager.swift in Sources */,
 				C59F3D202C565CDE0047D394 /* Metadata+CoreDataProperties.swift in Sources */,
 				C59F3D222C565CDE0047D394 /* SleepData+CoreDataProperties.swift in Sources */,
 			);
@@ -524,6 +595,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AI-Health-Assistant-Info.plist";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Access to your health data allows the app to provide personalized insights, track your progress, and offer tailored recommendations based on your activity and fitness levels\"";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"By granting access to write health data, you can securely store and manage your health information within the app and sync it with the Health app\"";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -565,6 +637,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AI-Health-Assistant-Info.plist";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Access to your health data allows the app to provide personalized insights, track your progress, and offer tailored recommendations based on your activity and fitness levels\"";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"By granting access to write health data, you can securely store and manage your health information within the app and sync it with the Health app\"";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

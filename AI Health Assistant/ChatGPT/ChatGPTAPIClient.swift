@@ -109,8 +109,10 @@ class ChatGPTAPIClient {
 
 struct Environment {
     static let openAIAPIKey: String = {
-        guard let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
-            fatalError("API key not set in environment variables")
+        guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+              let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
+              let apiKey = dict["OPEN_AI_API_KEY"] as? String else {
+            fatalError("API key not found in Config.plist")
         }
         return apiKey
     }()

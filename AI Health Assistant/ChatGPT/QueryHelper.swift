@@ -1,26 +1,42 @@
 import Foundation
 
 class QueryHelper {
+    
+    private let agents: [HealthKitAgent] = [HeartRateAgent(), WorkoutsAgent()]
+    
     static func parseResponse(_ response: String) -> [(dataType: String, timestamp: String)]? {
-        let pairs = response.split(separator: ";").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-        var result: [(dataType: String, timestamp: String)] = []
-        
-        for pair in pairs {
-            let components = pair.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            guard components.count == 2 else {
-                print("Invalid pair format: \(pair)")
-                return nil
+            // Create a character set with allowed characters: agent names, commas, semicolons, and numbers
+            let allowedCharacters = CharacterSet(charactersIn: "0123456789,;")
+            let agentNames = ["HeartRateData", "SleepData", "WorkoutData", "StepData"]
+            
+            // Combine the allowed characters with the characters from agent names
+            let agentNameCharacters = CharacterSet(charactersIn: agentNames.joined())
+            let finalAllowedCharacters = allowedCharacters.union(agentNameCharacters)
+            
+            // Filter the response to include only allowed characters
+            let filteredResponse = response.unicodeScalars.filter { finalAllowedCharacters.contains($0) }
+            let cleanedResponse = String(String.UnicodeScalarView(filteredResponse))
+            
+            // Split the cleaned response into pairs
+            let pairs = cleanedResponse.split(separator: ";").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            var result: [(dataType: String, timestamp: String)] = []
+            
+            for pair in pairs {
+                let components = pair.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                guard components.count == 2 else {
+                    print("Invalid pair format: \(pair)")
+                    return nil
+                }
+                
+                let dataType = components[0]
+                let timestamp = components[1]
+                
+                result.append((dataType, timestamp))
             }
             
-            let dataType = components[0].replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "")
-            let timestamp = components[1].replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "")
-            
-            result.append((dataType, timestamp))
+            print("pairs: ", pairs)
+            return result
         }
-        
-        print("pairs: ", pairs)
-        return result
-    }
     
     static func formatPrompt(for query: String) -> String {
         """
