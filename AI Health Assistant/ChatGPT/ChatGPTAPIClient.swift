@@ -1,6 +1,8 @@
 import Foundation
+import Combine
 
 class ChatGPTAPIClient {
+    private var globalState = GlobalState.shared
     
     static let goodModel = "gpt-4o"
     static let badModel = "gpt-3.5-turbo"
@@ -29,10 +31,12 @@ class ChatGPTAPIClient {
         let currentQuery = "User: \(message)"
         let fullConversation = conversationHistory + [currentQuery]
         
+        print("\n\n\n\nowen here: ", globalState.activeTrainer)
+        
         let parameters: [String: Any] = [
             "model": model,
             "messages": [
-                ["role": "system", "content": "You are a helpful assistant."],
+                ["role": "system", "content": globalState.activeTrainer.systemMessage],
                 ["role": "user", "content": fullConversation.joined(separator: "\n")]
             ],
             "temperature": temperature
@@ -58,7 +62,6 @@ class ChatGPTAPIClient {
             // Debug print: Response details
             if let httpResponse = response as? HTTPURLResponse {
                 print("Response Status Code: \(httpResponse.statusCode)")
-                print("Response Headers: \(httpResponse.allHeaderFields)")
             }
             
             if let error = error {
@@ -107,6 +110,7 @@ class ChatGPTAPIClient {
     }
 }
 
+
 struct Environment {
     static let openAIAPIKey: String = {
         guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
@@ -117,3 +121,4 @@ struct Environment {
         return apiKey
     }()
 }
+

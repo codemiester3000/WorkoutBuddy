@@ -14,11 +14,6 @@ struct InputView: View {
                 .background(Color(UIColor.systemBackground))
                 .cornerRadius(20)
                 .focused($isTextFieldFocused)
-                .onAppear {
-                    DispatchQueue.main.async {
-                        isTextFieldFocused = true
-                    }
-                }
             Button(action: sendMessage) {
                 Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 24, weight: .semibold))

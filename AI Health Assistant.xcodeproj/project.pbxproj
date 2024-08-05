@@ -28,6 +28,10 @@
 		C54CD7BB2C5E8868001E749B /* ActiveAgentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7BA2C5E8868001E749B /* ActiveAgentsManager.swift */; };
 		C54CD7BD2C5E8C3A001E749B /* HeartRateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7BC2C5E8C3A001E749B /* HeartRateAnimationView.swift */; };
 		C54CD7BF2C5F098C001E749B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C54CD7BE2C5F098C001E749B /* Config.plist */; };
+		C54CD7C12C6000BB001E749B /* TrainerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7C02C6000BB001E749B /* TrainerSelectorView.swift */; };
+		C54CD7CC2C6006B2001E749B /* trainer1.png in Resources */ = {isa = PBXBuildFile; fileRef = C54CD7CB2C6006B2001E749B /* trainer1.png */; };
+		C54CD7CE2C600F75001E749B /* PersonalTrainerChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7CD2C600F75001E749B /* PersonalTrainerChatView.swift */; };
+		C54CD7D02C60126F001E749B /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CD7CF2C60126F001E749B /* GlobalState.swift */; };
 		C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */; };
 		C59F3D1C2C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */; };
 		C59F3D1D2C565CDE0047D394 /* StepData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */; };
@@ -88,6 +92,10 @@
 		C54CD7BA2C5E8868001E749B /* ActiveAgentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAgentsManager.swift; sourceTree = "<group>"; };
 		C54CD7BC2C5E8C3A001E749B /* HeartRateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateAnimationView.swift; sourceTree = "<group>"; };
 		C54CD7BE2C5F098C001E749B /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		C54CD7C02C6000BB001E749B /* TrainerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainerSelectorView.swift; sourceTree = "<group>"; };
+		C54CD7CB2C6006B2001E749B /* trainer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trainer1.png; path = "AI Health Assistant/Resources/untitled folder/trainer1.png"; sourceTree = SOURCE_ROOT; };
+		C54CD7CD2C600F75001E749B /* PersonalTrainerChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTrainerChatView.swift; sourceTree = "<group>"; };
+		C54CD7CF2C60126F001E749B /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 		C59F3D132C565CDE0047D394 /* HeartRateData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C59F3D142C565CDE0047D394 /* HeartRateData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeartRateData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C59F3D152C565CDE0047D394 /* StepData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -230,6 +238,8 @@
 				C54CD7B02C5D9C49001E749B /* TypingIndicatorView.swift */,
 				C54CD7B22C5D9CFD001E749B /* AIResponseView.swift */,
 				C54CD7BC2C5E8C3A001E749B /* HeartRateAnimationView.swift */,
+				C54CD7C02C6000BB001E749B /* TrainerSelectorView.swift */,
+				C54CD7CD2C600F75001E749B /* PersonalTrainerChatView.swift */,
 			);
 			name = UI;
 			path = "AI Health Assistant/UI";
@@ -238,6 +248,7 @@
 		C54CD7B52C5DC368001E749B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C54CD7C32C6004F3001E749B /* Images */,
 				C54CD7B62C5DC368001E749B /* Fonts */,
 				C54CD7BE2C5F098C001E749B /* Config.plist */,
 			);
@@ -250,6 +261,14 @@
 				C54CD7B72C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C54CD7C32C6004F3001E749B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				C54CD7CB2C6006B2001E749B /* trainer1.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		C59F3D252C5660710047D394 /* HealthKit */ = {
@@ -269,6 +288,7 @@
 				C59F3D272C5661600047D394 /* QueryHelper.swift */,
 				C59F3D292C5661D10047D394 /* QueryHandler.swift */,
 				C54CD7BA2C5E8868001E749B /* ActiveAgentsManager.swift */,
+				C54CD7CF2C60126F001E749B /* GlobalState.swift */,
 			);
 			path = ChatGPT;
 			sourceTree = "<group>";
@@ -381,6 +401,7 @@
 				C535113D2BEAFD9A00766819 /* Preview Assets.xcassets in Resources */,
 				C53511392BEAFD9A00766819 /* Assets.xcassets in Resources */,
 				C54CD7B82C5DC3CA001E749B /* JosefinSans-VariableFont_wght.ttf in Resources */,
+				C54CD7CC2C6006B2001E749B /* trainer1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,9 +447,12 @@
 				C59F3D1F2C565CDE0047D394 /* Metadata+CoreDataClass.swift in Sources */,
 				C54CD7AD2C5D9B8B001E749B /* Message.swift in Sources */,
 				C59F3D1B2C565CDE0047D394 /* HeartRateData+CoreDataClass.swift in Sources */,
+				C54CD7C12C6000BB001E749B /* TrainerSelectorView.swift in Sources */,
+				C54CD7CE2C600F75001E749B /* PersonalTrainerChatView.swift in Sources */,
 				C53511602BEB01B000766819 /* ChatGPTAPIClient.swift in Sources */,
 				C54CD7BD2C5E8C3A001E749B /* HeartRateAnimationView.swift in Sources */,
 				C54CD7AF2C5D9C35001E749B /* MessageView.swift in Sources */,
+				C54CD7D02C60126F001E749B /* GlobalState.swift in Sources */,
 				C54CD7BB2C5E8868001E749B /* ActiveAgentsManager.swift in Sources */,
 				C59F3D202C565CDE0047D394 /* Metadata+CoreDataProperties.swift in Sources */,
 				C59F3D222C565CDE0047D394 /* SleepData+CoreDataProperties.swift in Sources */,

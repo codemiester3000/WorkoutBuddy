@@ -1,10 +1,8 @@
 import SwiftUI
 
 struct ChatBotView: View {
+    @ObservedObject private var globalState = GlobalState.shared
     private let queryHandler = QueryHandler()
-    private let initialMessage = """
-        Hello! I am your Health Assistant powered by HealthKit and GPT. I can analyze your HealthKit data to provide insights on your health and fitness. Ask me anything about your health data, workouts, or general health advice. How can I help you today?
-        """
     
     @State private var messageText = ""
     @State private var conversation: [Message] = []
@@ -12,12 +10,17 @@ struct ChatBotView: View {
     
     @FocusState private var isTextFieldFocused: Bool
     
+    private var initialMessage: String {
+        print("updating the welcome message", globalState.activeTrainer.welcomeMessage)
+        return globalState.activeTrainer.welcomeMessage
+    }
+    
     var body: some View {
         ZStack {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
-                HeaderView()
+                // HeaderView()
                 
                 ChatView(conversation: $conversation, isLoadingResponse: $isLoadingResponse)
                 
