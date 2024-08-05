@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomePageView: View {
+struct TrainerSelectorView: View {
     @ObservedObject var globalState = GlobalState.shared
     
     var body: some View {
