@@ -11,7 +11,7 @@ struct HomePageView: View {
                         Text("Choose Your Trainer")
                             .font(.custom("JosefinSans-VariableFont_wght", size: 24))
                             .bold()
-                            .padding(.vertical)
+                            .padding(.vertical, 10)
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -26,11 +26,11 @@ struct HomePageView: View {
                                 ),
                                 label: {
                                     TrainerCard(trainer: trainer)
-                                        .frame(height: 250)
+                                        .frame(height: 280)
                                 }
                             )
                             .simultaneousGesture(TapGesture().onEnded {
-                                print("\n updating the current trainer: ", trainer.name)
+                                print("\nUpdating the current trainer: ", trainer.name)
                                 globalState.activeTrainer = trainer
                             })
                         }
@@ -48,15 +48,15 @@ struct TrainerCard: View {
     var trainer: Trainer
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack {
             Image(trainer.imageUrl)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(height: 150)
+                .frame(height: 180)
                 .clipped()
                 .cornerRadiusSpecific(15, corners: [.topLeft, .topRight])
             
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(trainer.name)
                     .font(.headline)
                     .foregroundColor(.primary)
@@ -66,9 +66,10 @@ struct TrainerCard: View {
                     .foregroundColor(.secondary)
             }
             .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [trainer.color.opacity(0.3), trainer.color.opacity(0.1)]),
+                    gradient: Gradient(colors: [Color.white.opacity(0.8), Color.white]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -77,7 +78,7 @@ struct TrainerCard: View {
         }
         .background(Color.white)
         .cornerRadius(15)
-        .shadow(color: Color.gray.opacity(0.3), radius: 10, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
     }
 }
 
