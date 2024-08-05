@@ -17,6 +17,7 @@ struct PersonalTrainerChatView: View {
                     .overlay(
                         LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), Color.clear]), startPoint: .bottom, endPoint: .top)
                     )
+                    .edgesIgnoringSafeArea(.top)
                 
                 VStack {
                     Text(characterName)
@@ -39,7 +40,7 @@ struct PersonalTrainerChatView: View {
                 .background(Color.white)
                 .cornerRadius(20)
                 .shadow(radius: 5)
-                .padding(.horizontal)
+                .padding([.horizontal, .top], 20)
                 .padding(.bottom, 20)
             
             Spacer()

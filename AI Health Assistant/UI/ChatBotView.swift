@@ -11,8 +11,7 @@ struct ChatBotView: View {
     @FocusState private var isTextFieldFocused: Bool
     
     private var initialMessage: String {
-        print("updating the welcome message", globalState.activeTrainer.welcomeMessage)
-        return globalState.activeTrainer.welcomeMessage
+        globalState.activeTrainer.welcomeMessage
     }
     
     var body: some View {
@@ -20,8 +19,6 @@ struct ChatBotView: View {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
-                // HeaderView()
-                
                 ChatView(conversation: $conversation, isLoadingResponse: $isLoadingResponse)
                 
                 InputView(messageText: $messageText, isTextFieldFocused: $isTextFieldFocused, sendMessage: sendMessage)
