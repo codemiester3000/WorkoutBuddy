@@ -24,8 +24,13 @@ struct PersonalTrainerChatView: View {
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(20)
+                .shadow(radius: 5)
+                .padding([.horizontal, .top], 20)
                 .padding(.bottom, 20)
                 .frame(height: UIScreen.main.bounds.height / 2)
+                .padding(.bottom, 16)
+            
+            Spacer()
         }
         .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
     }

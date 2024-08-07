@@ -10,6 +10,10 @@ struct Trainer {
     let color: Color
     let systemMessage: String
     let welcomeMessage: String
+    
+    static func == (lhs: Trainer, rhs: Trainer) -> Bool {
+        return lhs.imageUrl == rhs.imageUrl && lhs.name == rhs.name
+    }
 }
 
 class GlobalState: ObservableObject {
