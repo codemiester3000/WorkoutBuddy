@@ -82,10 +82,31 @@ struct TrainerRow: View {
     }
 
     var expandedView: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(trainer.description)
-                .font(.subheadline)
-                .foregroundColor(.primary)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(trainer.description)
+                    .font(.custom("JosefinSans-VariableFont_wght", size: 16))
+                    .foregroundColor(.primary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                Button(action: {
+                    // Action to request HealthKit access
+                }) {
+                    Text("Grant HealthKit Access")
+                        .font(.custom("JosefinSans-VariableFont_wght", size: 14))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Color.green)
+                        .cornerRadius(8)
+                }
+            }
+
+            ForEach(trainer.bulletPoints, id: \.self) { point in
+                Text("• \(point)")
+                    .font(.custom("JosefinSans-VariableFont_wght", size: 16))
+                    .foregroundColor(.primary)
+            }
 
             NavigationLink(destination: PersonalTrainerChatView(
                 characterImage: Image(trainer.imageUrl),
@@ -93,17 +114,20 @@ struct TrainerRow: View {
                 characterTagline: trainer.title
             )) {
                 Text("Begin Discussion")
-                    .font(.headline)
+                    .font(.custom("JosefinSans-VariableFont_wght", size: 16))
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
                     .cornerRadius(10)
+                    .shadow(color: Color.blue.opacity(0.4), radius: 5, x: 0, y: 5)
             }
         }
         .padding()
         .background(Color.white)
-        .cornerRadius(10)
+        .cornerRadius(15)
         .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
     }
+
+
 }
