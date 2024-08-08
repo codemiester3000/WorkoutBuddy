@@ -22,6 +22,12 @@ struct TrainerSelectorView: View {
                                     }
                                 }
                             }
+                            .simultaneousGesture(
+                                TapGesture().onEnded {
+                                    print("\nUpdating the current trainer: ", trainer.name)
+                                    globalState.activeTrainer = trainer
+                                }
+                            )
                     }
                 }
                 .padding(.horizontal)
@@ -58,15 +64,16 @@ struct TrainerRow: View {
     }
 
     var rowHeader: some View {
-        HStack {
+        HStack(alignment: .top, spacing: 16) {
             Image(trainer.imageUrl)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
+                .frame(width: 100, height: 100)
                 .clipped()
-                .cornerRadius(10)
+                .cornerRadius(15)
+                .shadow(radius: 3)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(trainer.name)
                     .font(.headline)
                     .foregroundColor(.primary)
@@ -82,7 +89,7 @@ struct TrainerRow: View {
     }
 
     var expandedView: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Text(trainer.description)
                     .font(.custom("JosefinSans-VariableFont_wght", size: 16))
@@ -97,21 +104,30 @@ struct TrainerRow: View {
                         .foregroundColor(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .background(Color.green)
+                        .background(Color.blue)
                         .cornerRadius(8)
+                        .shadow(color: Color.blue.opacity(0.4), radius: 5, x: 0, y: 5)
                 }
             }
 
-            ForEach(trainer.bulletPoints, id: \.self) { point in
-                Text("• \(point)")
-                    .font(.custom("JosefinSans-VariableFont_wght", size: 16))
-                    .foregroundColor(.primary)
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach(trainer.bulletPoints, id: \.self) { point in
+                    HStack(alignment: .top) {
+                        Text("•")
+                            .font(.custom("JosefinSans-VariableFont_wght", size: 16))
+                            .foregroundColor(.primary)
+                        Text(point)
+                            .font(.custom("JosefinSans-VariableFont_wght", size: 16))
+                            .foregroundColor(.primary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
             }
 
             NavigationLink(destination: PersonalTrainerChatView(
-                characterImage: Image(trainer.imageUrl),
-                characterName: trainer.name,
-                characterTagline: trainer.title
+//                characterImage: Image(trainer.imageUrl),
+//                characterName: trainer.name,
+//                characterTagline: trainer.title
             )) {
                 Text("Begin Discussion")
                     .font(.custom("JosefinSans-VariableFont_wght", size: 16))
@@ -128,6 +144,4 @@ struct TrainerRow: View {
         .cornerRadius(15)
         .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
     }
-
-
 }

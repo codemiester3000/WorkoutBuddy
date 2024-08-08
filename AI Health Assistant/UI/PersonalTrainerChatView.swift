@@ -1,37 +1,50 @@
 import SwiftUI
 
 struct PersonalTrainerChatView: View {
-    let characterImage: Image
-    let characterName: String
-    let characterTagline: String
+    @ObservedObject private var globalState = GlobalState.shared
     
     var body: some View {
         VStack(spacing: 0) {
-            ZStack(alignment: .bottom) {
-                characterImage
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: UIScreen.main.bounds.height / 2)
-                    .clipped()
-                    .overlay(
-                        LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), Color.clear]), startPoint: .bottom, endPoint: .top)
-                    )
-                    .edgesIgnoringSafeArea(.top)
-            }
+            TrainerInfo(trainer: globalState.activeTrainer)
+                .padding(.bottom, 10)
             
-            // Chat View
             ChatBotView()
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(20)
-                .shadow(radius: 5)
-                .padding([.horizontal, .top], 20)
-                .padding(.bottom, 20)
-                .frame(height: UIScreen.main.bounds.height / 2)
+                .padding(.vertical, 10)
                 .padding(.bottom, 16)
-            
-            Spacer()
         }
         .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
+    }
+}
+
+struct TrainerInfo: View {
+    var trainer: Trainer
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Image(trainer.imageUrl)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 150)
+                .clipped()
+
+            VStack(alignment: .leading) {
+                Text(trainer.name)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .shadow(radius: 5)
+                Text(trainer.title)
+                    .font(.headline)
+                    .foregroundColor(.white.opacity(0.75))
+                    .shadow(radius: 5)
+            }
+            .padding()
+        }
+        .cornerRadius(20)
+        .shadow(color: trainer.color.opacity(0.4), radius: 10, x: 0, y: 5)
+        .padding(.horizontal)
     }
 }

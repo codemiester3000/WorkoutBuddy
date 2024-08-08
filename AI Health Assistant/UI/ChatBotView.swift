@@ -18,8 +18,10 @@ struct ChatBotView: View {
         ZStack {
             Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 0) {
+            VStack() {
                 ChatView(conversation: $conversation, isLoadingResponse: $isLoadingResponse)
+                
+                Spacer()
                 
                 InputView(messageText: $messageText, isTextFieldFocused: $isTextFieldFocused, sendMessage: sendMessage)
             }
