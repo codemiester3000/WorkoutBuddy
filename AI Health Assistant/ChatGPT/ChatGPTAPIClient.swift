@@ -4,7 +4,7 @@ import Combine
 class ChatGPTAPIClient {
     private var globalState = GlobalState.shared
     
-    static let goodModel = "gpt-4o"
+    static let goodModel = "gpt-4o-mini"
     static let badModel = "gpt-3.5-turbo"
     
     static let shared = ChatGPTAPIClient()
